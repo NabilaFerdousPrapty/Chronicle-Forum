@@ -83,7 +83,7 @@ const displayAllPosts=(allPosts)=>{
                             </svg>
                             <p class="text-sm">${post.posted_time} min</p>
                         </div>
-                        <button onclick="markAsRead('${post.title}',${post.view_count})"  id="${post.id}" class="readBtn" ><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                        <button onclick="markAsRead('${post.title.replace(/'/g, "\\'")}',${post.view_count})"  id="${post.id}" class="readBtn" ><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
                                 viewBox="0 0 28 28" fill="none">
                                 <g clip-path="url(#clip0_57_457)">
                                     <path
@@ -206,26 +206,26 @@ loadLatestPosts();
 //         const buttonId = event.target.id;
 //         readPosts++;
 //         console.log(readPosts);
-//         const readCount=document.getElementById("markedAsRead");
-//         readCount.innerText=readPosts;
-//         const readCountDiv=document.getElementById('readCount');
-//         const readCard=document.createElement('div');
-//         readCard.innerHTML=`<div class="bg-white rounded-2xl flex justify-between p-5 my-3 gap-5">
+    //     const readCount=document.getElementById("markedAsRead");
+    //     readCount.innerText=readPosts;
+    //     const readCountDiv=document.getElementById('readCount');
+    //     const readCard=document.createElement('div');
+    //     readCard.innerHTML=`<div class="bg-white rounded-2xl flex justify-between p-5 my-3 gap-5">
 
-//         <div>10 Kids Unaware of Their <br> Halloween Costume</div>
-//         <div class="flex justify-center items-center"><svg xmlns="http://www.w3.org/2000/svg"
-//                 width="28" height="28" viewBox="0 0 28 28" fill="none">
-//                 <path
-//                     d="M11.6667 14C11.6667 14.6188 11.9125 15.2123 12.3501 15.6499C12.7877 16.0875 13.3812 16.3333 14 16.3333C14.6188 16.3333 15.2123 16.0875 15.6499 15.6499C16.0875 15.2123 16.3333 14.6188 16.3333 14C16.3333 13.3812 16.0875 12.7877 15.6499 12.3501C15.2123 11.9125 14.6188 11.6667 14 11.6667C13.3812 11.6667 12.7877 11.9125 12.3501 12.3501C11.9125 12.7877 11.6667 13.3812 11.6667 14Z"
-//                     stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round"
-//                     stroke-linejoin="round" />
-//                 <path
-//                     d="M24.5 14C21.7 18.6667 18.2 21 14 21C9.8 21 6.3 18.6667 3.5 14C6.3 9.33333 9.8 7 14 7C18.2 7 21.7 9.33333 24.5 14Z"
-//                     stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round"
-//                     stroke-linejoin="round" />
-//             </svg>1,568</div>
-//     </div>`;
-//       readCountDiv.appendChild(readCard)
+    //     <div>10 Kids Unaware of Their <br> Halloween Costume</div>
+    //     <div class="flex justify-center items-center"><svg xmlns="http://www.w3.org/2000/svg"
+    //             width="28" height="28" viewBox="0 0 28 28" fill="none">
+    //             <path
+    //                 d="M11.6667 14C11.6667 14.6188 11.9125 15.2123 12.3501 15.6499C12.7877 16.0875 13.3812 16.3333 14 16.3333C14.6188 16.3333 15.2123 16.0875 15.6499 15.6499C16.0875 15.2123 16.3333 14.6188 16.3333 14C16.3333 13.3812 16.0875 12.7877 15.6499 12.3501C15.2123 11.9125 14.6188 11.6667 14 11.6667C13.3812 11.6667 12.7877 11.9125 12.3501 12.3501C11.9125 12.7877 11.6667 13.3812 11.6667 14Z"
+    //                 stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round"
+    //                 stroke-linejoin="round" />
+    //             <path
+    //                 d="M24.5 14C21.7 18.6667 18.2 21 14 21C9.8 21 6.3 18.6667 3.5 14C6.3 9.33333 9.8 7 14 7C18.2 7 21.7 9.33333 24.5 14Z"
+    //                 stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round"
+    //                 stroke-linejoin="round" />
+    //         </svg>1,568</div>
+    // </div>`;
+    //   readCountDiv.appendChild(readCard)
        
 //     });
 // });
@@ -234,4 +234,24 @@ const markAsRead=(title,view)=>{
   console.log(view);
   readPosts++;
   console.log(readPosts);
+  const readCount=document.getElementById("markedAsRead");
+        readCount.innerText=readPosts;
+        const readCountDiv=document.getElementById('readCount');
+        const readCard=document.createElement('div');
+        readCard.innerHTML=`<div class="bg-white rounded-2xl flex justify-between p-5 my-3 gap-5">
+
+        <div>${title}</div>
+        <div class="flex justify-center items-center"><svg xmlns="http://www.w3.org/2000/svg"
+                width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <path
+                    d="M11.6667 14C11.6667 14.6188 11.9125 15.2123 12.3501 15.6499C12.7877 16.0875 13.3812 16.3333 14 16.3333C14.6188 16.3333 15.2123 16.0875 15.6499 15.6499C16.0875 15.2123 16.3333 14.6188 16.3333 14C16.3333 13.3812 16.0875 12.7877 15.6499 12.3501C15.2123 11.9125 14.6188 11.6667 14 11.6667C13.3812 11.6667 12.7877 11.9125 12.3501 12.3501C11.9125 12.7877 11.6667 13.3812 11.6667 14Z"
+                    stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path
+                    d="M24.5 14C21.7 18.6667 18.2 21 14 21C9.8 21 6.3 18.6667 3.5 14C6.3 9.33333 9.8 7 14 7C18.2 7 21.7 9.33333 24.5 14Z"
+                    stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>${view}</div>
+    </div>`;
+      readCountDiv.appendChild(readCard)
 }
