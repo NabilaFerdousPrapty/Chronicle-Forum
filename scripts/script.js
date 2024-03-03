@@ -46,7 +46,7 @@ const displayAllPosts=(allPosts)=>{
                     <p>Author : ${post.author.name}</p>
                 </div>
                 <div class=" mulish-bold border-b-2 border-dashed border-[#12132D40] pb-6">
-                    <h2 class="text-lg">${post.title}</h2>
+                    <h2 class="text-lg mulish-bold">${post.title}</h2>
                     <p class="mulish-light text-[#12132D99]">${post.description}</p>
                 </div>
                 <div class="flex justify-between items-center pt-6 px-6 gap-4">
@@ -62,7 +62,7 @@ const displayAllPosts=(allPosts)=>{
                             </svg>
                             <p class="text-sm">${post.comment_count}</p>
                         </div>
-                        <div class="md:flex">
+                        <div class="md:flex justify-center items-center">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
                                 viewBox="0 0 28 28" fill="none">
@@ -77,7 +77,7 @@ const displayAllPosts=(allPosts)=>{
                             </svg>
                             <p class="text-sm">${post.view_count}</p>
                         </div>
-                        <div class="md:flex">
+                        <div class="md:flex justify-center items-center">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
                                 viewBox="0 0 28 28" fill="none">
