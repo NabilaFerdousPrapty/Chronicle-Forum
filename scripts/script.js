@@ -1,3 +1,6 @@
+let isActive=false;
+let readPosts=0;
+
 const loadAllPosts=async ()=>{
     const url="https://openapi.programming-hero.com/api/retro-forum/posts";
     const response=await fetch(url);
@@ -10,16 +13,26 @@ const loadAllPosts=async ()=>{
 loadAllPosts();
 const displayAllPosts=(allPosts)=>{
     const allPostsContainer=document.getElementById('all-posts-container');
-    console.log(allPosts);
+    // console.log(allPosts);
+    allPostsContainer.innerText='';
     allPosts.forEach(post => {
-        console.log(post);
+        // console.log(post);
+        isActive=post.isActive;
+        let activeStatus=""
+        if (isActive) {
+           activeStatus=`<span class="indicator-item badge badge-success"></span>` ;
+        }else{
+            activeStatus=`<span class="indicator-item badge badge-error"></span>`
+        }
         const postCard=document.createElement('div');
         postCard.className="";
         postCard.innerHTML=`<div class="bg-[#F3F3F5] rounded-2xl p-5 py-10 my-4">
         <div class="md:flex  items-center lg:gap-28 md:gap-14 gap-6">
-            <div class="indicator">
-                <span class="indicator-item badge badge-success"></span>
-                <div class="grid md:w-24 md:h-24 w-24 h-24 bg-base-300 place-items-center"><img src="${post.image}" alt="" class=""></div>
+            <div class="indicator mx-5">
+               ${activeStatus}
+               <div class="md:w-24 md:h-24 w-52 h-18 bg-base-300 ">
+               <img src="${post.image}" alt="" class=" mx-auto ">
+           </div>
             </div>
             <div>
                 <div class="text-center md:flex justify-start items-center">
@@ -30,9 +43,9 @@ const displayAllPosts=(allPosts)=>{
                     <h2 class="text-lg">${post.title}</h2>
                     <p class="mulish-light text-[#12132D99]">${post.description}</p>
                 </div>
-                <div class="flex justify-between items-center pt-6">
-                    <div class="flex-1 flex justify-between items-center">
-                        <div class="md:flex">
+                <div class="flex justify-between items-center pt-6 px-6 gap-4">
+                    <div class=" flex text-center lg:gap-24 md:gap-16 gap-10">
+                        <div class="md:flex justify-center items-center">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
                                 viewBox="0 0 28 28" fill="none">
@@ -69,7 +82,7 @@ const displayAllPosts=(allPosts)=>{
                             </svg>
                             <p class="text-sm">${post.posted_time} min</p>
                         </div>
-                        <button class=""><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                        <button  id="${post.id}" class="readBtn"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
                                 viewBox="0 0 28 28" fill="none">
                                 <g clip-path="url(#clip0_57_457)">
                                     <path
@@ -92,8 +105,126 @@ const displayAllPosts=(allPosts)=>{
 
         </div>
     </div>`;
+
     allPostsContainer.appendChild(postCard);
         
     });
 
 }
+const getPostByCategories=()=>{
+    const searchText=document.getElementById('searchBox').value ;
+    // console.log(searchText);
+    displayPostByCategories(searchText)
+}
+
+const displayPostByCategories=(categoryID)=>{
+    console.log(categoryID);
+    loadPostByCategory(categoryID);
+
+}
+const loadPostByCategory=async(categoryID)=>{
+    const url=`https://openapi.programming-hero.com/api/retro-forum/posts?category=${categoryID}`
+    const response=await fetch(url);
+    const data=await response.json();
+   const post=data.posts;
+    console.log(post);
+    displayAllPosts(post)
+    // displayAllPosts(data);
+}
+const loadLatestPosts=async ()=>{
+    const url="https://openapi.programming-hero.com/api/retro-forum/latest-posts";
+    const response=await fetch(url);
+    const data=await response.json();
+    // console.log(data);
+    displayLatestPosts(data)
+
+}
+const displayLatestPosts=(data)=>{
+    // console.log(data);
+    data.forEach(post=>{
+        // console.log(post);
+        const postCard=document.createElement('div');
+        postCard.innerHTML=` <div class="card w-auto bg-base-100 shadow-xl ">
+        <figure class="px-10 pt-10">
+            <img src="${post.cover_image}" alt="Posts"
+                class="rounded-xl" />
+        </figure>
+        <div class="card-body">
+            <p class="flex"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none">
+                    <g clip-path="url(#clip0_29_1881)">
+                        <path
+                            d="M4 7C4 6.46957 4.21071 5.96086 4.58579 5.58579C4.96086 5.21071 5.46957 5 6 5H18C18.5304 5 19.0391 5.21071 19.4142 5.58579C19.7893 5.96086 20 6.46957 20 7V19C20 19.5304 19.7893 20.0391 19.4142 20.4142C19.0391 20.7893 18.5304 21 18 21H6C5.46957 21 4.96086 20.7893 4.58579 20.4142C4.21071 20.0391 4 19.5304 4 19V7Z"
+                            stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M16 3V7" stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M8 3V7" stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M4 11H20" stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M11 16C11 16.2652 11.1054 16.5196 11.2929 16.7071C11.4804 16.8946 11.7348 17 12 17C12.2652 17 12.5196 16.8946 12.7071 16.7071C12.8946 16.5196 13 16.2652 13 16C13 15.7348 12.8946 15.4804 12.7071 15.2929C12.5196 15.1054 12.2652 15 12 15C11.7348 15 11.4804 15.1054 11.2929 15.2929C11.1054 15.4804 11 15.7348 11 16Z"
+                            stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_29_1881">
+                            <rect width="24" height="24" fill="white" />
+                        </clipPath>
+                    </defs>
+                </svg> <span>${post.author.posted_date?post.author.posted_date:"No published Date"}</span></p>
+            <h2 class="card-title">${post.title}</h2>
+            <p>${post.description}</p>
+            <div class="card-actions flex">
+                <img src="${post.profile_image}" alt="" class="rounded-full w-24 h-24">
+                <div>
+                    <p>${post.author.name}</p>
+                    <p>${post.author.designation ? post.author.designation : ""}</p>
+
+                </div>
+            </div>
+        </div>
+    </div>`
+    const latestPost=document.getElementById('latestPost');
+    latestPost.appendChild(postCard);
+        
+    })
+    
+}
+loadLatestPosts();
+   
+
+
+  
+// }
+ console.log("Script is running...");
+const readBtns = document.querySelectorAll('.readBtn');
+readBtns.forEach(readBtn => {
+    readBtn.addEventListener('click', (event) => {
+        const buttonId = event.target.id;
+        readPosts++;
+        console.log(readPosts);
+        const readCount=document.getElementById("markedAsRead");
+        readCount.innerText=readPosts;
+        const readCountDiv=document.getElementById('readCount');
+        const readCard=document.createElement('div');
+        readCard.innerHTML=`<div class="bg-white rounded-2xl flex justify-between p-5 my-3 gap-5">
+
+        <div>10 Kids Unaware of Their <br> Halloween Costume</div>
+        <div class="flex justify-center items-center"><svg xmlns="http://www.w3.org/2000/svg"
+                width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <path
+                    d="M11.6667 14C11.6667 14.6188 11.9125 15.2123 12.3501 15.6499C12.7877 16.0875 13.3812 16.3333 14 16.3333C14.6188 16.3333 15.2123 16.0875 15.6499 15.6499C16.0875 15.2123 16.3333 14.6188 16.3333 14C16.3333 13.3812 16.0875 12.7877 15.6499 12.3501C15.2123 11.9125 14.6188 11.6667 14 11.6667C13.3812 11.6667 12.7877 11.9125 12.3501 12.3501C11.9125 12.7877 11.6667 13.3812 11.6667 14Z"
+                    stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path
+                    d="M24.5 14C21.7 18.6667 18.2 21 14 21C9.8 21 6.3 18.6667 3.5 14C6.3 9.33333 9.8 7 14 7C18.2 7 21.7 9.33333 24.5 14Z"
+                    stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>1,568</div>
+    </div>`;
+      readCountDiv.appendChild(readCard)
+       
+    });
+});

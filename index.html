@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro Forum</title>
+    <title>Chronicle Forum</title>
     <link rel="stylesheet" href="styles/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -95,7 +95,7 @@
                                 </svg></a>
                         </li>
 
-                        <li class="tooltip" data-tip="Log in"> <a
+                        <li class="tooltip " data-tip="Add account"> <a
                                 class="border-2 border-[#0307121A] rounded-full bg-[#12132D08] p-2" href=""><svg
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none">
@@ -136,7 +136,7 @@
                     <div class="py-5">
                         <h2 class=" text-xl md:text-3xl lg:text-5xl text-white mulish-extra-bold">Welcome to the <br>
                             <span
-                                class="bg-gradient-to-r from-[#797DFC] to-[#797DFC00] text-transparent bg-clip-text">ReTro</span>
+                                class="bg-gradient-to-r from-[#797DFC] to-[#797DFC00] text-transparent bg-clip-text">Chronicle</span>
                             Forum
                         </h2>
 
@@ -146,9 +146,9 @@
                         </h2>
                         <div class="relative">
                             <input type="text" class="border border-gray-300  px-10 py-2 w-full  rounded-3xl"
-                                placeholder="Search here anything">
+                              id="searchBox"  placeholder="Search here anything">
                             <button type="button"
-                                class="absolute inset-y-1 right-1 px-5  bg-[#797DFC] text-white rounded-3xl text-xs md:text-base mulish-bold">Search</button>
+                                class="absolute inset-y-1 right-1 px-5  bg-[#797DFC] text-white rounded-3xl text-xs md:text-base mulish-bold" onclick="getPostByCategories()">Search</button>
                         </div>
 
                     </div>
@@ -190,9 +190,9 @@
                 <div id="all-posts-container" class="flex-1">
                     
                 </div>
-                <div class="bg-[#12132D0D] pt-3 px-10 mt-3 rounded-3xl">
-                    <div class="flex justify-between items-center">
-                        <h2 class="text-lg">Title</h2>
+                <div class="bg-[#12132D0D] pt-3  mt-3 rounded-3xl">
+                    <div class="flex justify-between items-center py-4 ">
+                        <h2 class="text-lg ">Title</h2>
                         <div class="flex">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none">
@@ -208,43 +208,13 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <p>Mark as read <span>(4)</span></p>
+                            <p>Mark as read (<span id="markedAsRead">0</span>)</p>
                         </div>
 
                     </div>
-                    <div class="px-1 py-2">
+                    <div id="readCount" class="px-10 py-2">
 
-                        <div class="bg-white rounded-2xl flex justify-between p-5 my-3 gap-5">
-
-                            <div>10 Kids Unaware of Their <br> Halloween Costume</div>
-                            <div class="flex justify-center items-center"><svg xmlns="http://www.w3.org/2000/svg"
-                                    width="28" height="28" viewBox="0 0 28 28" fill="none">
-                                    <path
-                                        d="M11.6667 14C11.6667 14.6188 11.9125 15.2123 12.3501 15.6499C12.7877 16.0875 13.3812 16.3333 14 16.3333C14.6188 16.3333 15.2123 16.0875 15.6499 15.6499C16.0875 15.2123 16.3333 14.6188 16.3333 14C16.3333 13.3812 16.0875 12.7877 15.6499 12.3501C15.2123 11.9125 14.6188 11.6667 14 11.6667C13.3812 11.6667 12.7877 11.9125 12.3501 12.3501C11.9125 12.7877 11.6667 13.3812 11.6667 14Z"
-                                        stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path
-                                        d="M24.5 14C21.7 18.6667 18.2 21 14 21C9.8 21 6.3 18.6667 3.5 14C6.3 9.33333 9.8 7 14 7C18.2 7 21.7 9.33333 24.5 14Z"
-                                        stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>1,568</div>
-                        </div>
-                        <div class="bg-white rounded-2xl flex justify-between p-5 my-3 gap-5">
-
-                            <div>10 Kids Unaware of Their <br> Halloween Costume</div>
-                            <div class="flex justify-center items-center"><svg xmlns="http://www.w3.org/2000/svg"
-                                    width="28" height="28" viewBox="0 0 28 28" fill="none">
-                                    <path
-                                        d="M11.6667 14C11.6667 14.6188 11.9125 15.2123 12.3501 15.6499C12.7877 16.0875 13.3812 16.3333 14 16.3333C14.6188 16.3333 15.2123 16.0875 15.6499 15.6499C16.0875 15.2123 16.3333 14.6188 16.3333 14C16.3333 13.3812 16.0875 12.7877 15.6499 12.3501C15.2123 11.9125 14.6188 11.6667 14 11.6667C13.3812 11.6667 12.7877 11.9125 12.3501 12.3501C11.9125 12.7877 11.6667 13.3812 11.6667 14Z"
-                                        stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path
-                                        d="M24.5 14C21.7 18.6667 18.2 21 14 21C9.8 21 6.3 18.6667 3.5 14C6.3 9.33333 9.8 7 14 7C18.2 7 21.7 9.33333 24.5 14Z"
-                                        stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>1,568</div>
-                        </div>
-                    </div>
+                        
                 </div>
             </div>
         </section>
@@ -269,137 +239,15 @@
                 <p class="lg:py-4 text-[#12132D99] mulish-light">Yes, you can run unit tests and view the results
                     directly within the app. The <br> integrated testing features allow for a streamlined .</p>
             </div>
-            <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3">
-                <div class="card w-auto bg-base-100 shadow-xl">
-                    <figure class="px-10 pt-10">
-                        <img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes"
-                            class="rounded-xl" />
-                    </figure>
-                    <div class="card-body">
-                        <p class="flex"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24" fill="none">
-                                <g clip-path="url(#clip0_29_1881)">
-                                    <path
-                                        d="M4 7C4 6.46957 4.21071 5.96086 4.58579 5.58579C4.96086 5.21071 5.46957 5 6 5H18C18.5304 5 19.0391 5.21071 19.4142 5.58579C19.7893 5.96086 20 6.46957 20 7V19C20 19.5304 19.7893 20.0391 19.4142 20.4142C19.0391 20.7893 18.5304 21 18 21H6C5.46957 21 4.96086 20.7893 4.58579 20.4142C4.21071 20.0391 4 19.5304 4 19V7Z"
-                                        stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M16 3V7" stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M8 3V7" stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M4 11H20" stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M11 16C11 16.2652 11.1054 16.5196 11.2929 16.7071C11.4804 16.8946 11.7348 17 12 17C12.2652 17 12.5196 16.8946 12.7071 16.7071C12.8946 16.5196 13 16.2652 13 16C13 15.7348 12.8946 15.4804 12.7071 15.2929C12.5196 15.1054 12.2652 15 12 15C11.7348 15 11.4804 15.1054 11.2929 15.2929C11.1054 15.4804 11 15.7348 11 16Z"
-                                        stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_29_1881">
-                                        <rect width="24" height="24" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg> <span>29 January 2024</span></p>
-                        <h2 class="card-title">What will a mars habitat force that impact in our daily life!!!</h2>
-                        <p>Yes, you can run unit tests and view the results directly within the app. </p>
-                        <div class="card-actions flex">
-                            <img src="images/Ellipse 1.svg" alt="">
-                            <div>
-                                <p>Cameron Williamson</p>
-                                <p>Unknown</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card w-auto bg-base-100 shadow-xl">
-                    <figure class="px-10 pt-10">
-                        <img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes"
-                            class="rounded-xl" />
-                    </figure>
-                    <div class="card-body">
-                        <p class="flex"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24" fill="none">
-                                <g clip-path="url(#clip0_29_1881)">
-                                    <path
-                                        d="M4 7C4 6.46957 4.21071 5.96086 4.58579 5.58579C4.96086 5.21071 5.46957 5 6 5H18C18.5304 5 19.0391 5.21071 19.4142 5.58579C19.7893 5.96086 20 6.46957 20 7V19C20 19.5304 19.7893 20.0391 19.4142 20.4142C19.0391 20.7893 18.5304 21 18 21H6C5.46957 21 4.96086 20.7893 4.58579 20.4142C4.21071 20.0391 4 19.5304 4 19V7Z"
-                                        stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M16 3V7" stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M8 3V7" stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M4 11H20" stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M11 16C11 16.2652 11.1054 16.5196 11.2929 16.7071C11.4804 16.8946 11.7348 17 12 17C12.2652 17 12.5196 16.8946 12.7071 16.7071C12.8946 16.5196 13 16.2652 13 16C13 15.7348 12.8946 15.4804 12.7071 15.2929C12.5196 15.1054 12.2652 15 12 15C11.7348 15 11.4804 15.1054 11.2929 15.2929C11.1054 15.4804 11 15.7348 11 16Z"
-                                        stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_29_1881">
-                                        <rect width="24" height="24" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg> <span>29 January 2024</span></p>
-                        <h2 class="card-title">What will a mars habitat force that impact in our daily life!!!</h2>
-                        <p>Yes, you can run unit tests and view the results directly within the app. </p>
-                        <div class="card-actions flex">
-                            <img src="images/Ellipse 1.svg" alt="">
-                            <div>
-                                <p>Cameron Williamson</p>
-                                <p>Unknown</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card w-auto bg-base-100 shadow-xl">
-                    <figure class="px-10 pt-10">
-                        <img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes"
-                            class="rounded-xl" />
-                    </figure>
-                    <div class="card-body">
-                        <p class="flex"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24" fill="none">
-                                <g clip-path="url(#clip0_29_1881)">
-                                    <path
-                                        d="M4 7C4 6.46957 4.21071 5.96086 4.58579 5.58579C4.96086 5.21071 5.46957 5 6 5H18C18.5304 5 19.0391 5.21071 19.4142 5.58579C19.7893 5.96086 20 6.46957 20 7V19C20 19.5304 19.7893 20.0391 19.4142 20.4142C19.0391 20.7893 18.5304 21 18 21H6C5.46957 21 4.96086 20.7893 4.58579 20.4142C4.21071 20.0391 4 19.5304 4 19V7Z"
-                                        stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M16 3V7" stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M8 3V7" stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M4 11H20" stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M11 16C11 16.2652 11.1054 16.5196 11.2929 16.7071C11.4804 16.8946 11.7348 17 12 17C12.2652 17 12.5196 16.8946 12.7071 16.7071C12.8946 16.5196 13 16.2652 13 16C13 15.7348 12.8946 15.4804 12.7071 15.2929C12.5196 15.1054 12.2652 15 12 15C11.7348 15 11.4804 15.1054 11.2929 15.2929C11.1054 15.4804 11 15.7348 11 16Z"
-                                        stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_29_1881">
-                                        <rect width="24" height="24" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg> <span>29 January 2024</span></p>
-                        <h2 class="card-title">What will a mars habitat force that impact in our daily life!!!</h2>
-                        <p>Yes, you can run unit tests and view the results directly within the app. </p>
-                        <div class="card-actions flex">
-                            <img src="images/Ellipse 1.svg" alt="">
-                            <div>
-                                <p>Cameron Williamson</p>
-                                <p>Unknown</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3" id="latestPost">
+               
             </div>
         </section>
 
     </main>
     <footer class="footer footer-center p-10 bg-base-200 text-base-content rounded mt-5">
         <nav>
-            <h2 class="text-3xl mulish-extra-bold">ReTro</h2>
+            <h2 class="text-3xl mulish-extra-bold">Chronicle</h2>
         </nav>
 
         <nav>
