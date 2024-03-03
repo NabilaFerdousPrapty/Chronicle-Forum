@@ -1,13 +1,19 @@
 let isActive=false;
 let readPosts=0;
-
+let isLoading=false;
 const loadAllPosts=async ()=>{
+    isLoading=true;
+    
     const url="https://openapi.programming-hero.com/api/retro-forum/posts";
     const response=await fetch(url);
     const data=await response.json();
+    
     const allPosts=data.posts;
+    toggleLoadingSpinner(isLoading);
     // console.log(allPosts);
     displayAllPosts(allPosts);
+    toggleLoadingSpinner(false);
+    
 
 }
 loadAllPosts();
@@ -15,6 +21,7 @@ const displayAllPosts=(allPosts)=>{
     const allPostsContainer=document.getElementById('all-posts-container');
     // console.log(allPosts);
     allPostsContainer.innerText='';
+    
     allPosts.forEach(post => {
         // console.log(post);
         isActive=post.isActive;
@@ -110,12 +117,15 @@ const displayAllPosts=(allPosts)=>{
     allPostsContainer.appendChild(postCard);
         
     });
+    isLoading=false;
+    toggleLoadingSpinner(isLoading);
 
 }
 const getPostByCategories=()=>{
     const searchText=document.getElementById('searchBox').value ;
     // console.log(searchText);
-    displayPostByCategories(searchText)
+    displayPostByCategories(searchText);
+    toggleLoadingSpinner(true);
 }
 
 const displayPostByCategories=(categoryID)=>{
@@ -136,6 +146,7 @@ const loadLatestPosts=async ()=>{
     const url="https://openapi.programming-hero.com/api/retro-forum/latest-posts";
     const response=await fetch(url);
     const data=await response.json();
+    
     // console.log(data);
     displayLatestPosts(data)
 
@@ -181,7 +192,7 @@ const displayLatestPosts=(data)=>{
                 <img src="${post.profile_image}" alt="" class="rounded-full w-24 h-24">
                 <div>
                     <p>${post.author.name}</p>
-                    <p>${post.author.designation ? post.author.designation : ""}</p>
+                    <p>${post.author.designation ? post.author.designation : "Unknown"}</p>
 
                 </div>
             </div>
@@ -195,40 +206,6 @@ const displayLatestPosts=(data)=>{
 }
 loadLatestPosts();
    
-
-
-  
-// }
- console.log("Script is running...");
-// const readBtns = document.querySelectorAll('.readBtn');
-// readBtns.forEach(readBtn => {
-//     readBtn.addEventListener('click', (event) => {
-//         const buttonId = event.target.id;
-//         readPosts++;
-//         console.log(readPosts);
-    //     const readCount=document.getElementById("markedAsRead");
-    //     readCount.innerText=readPosts;
-    //     const readCountDiv=document.getElementById('readCount');
-    //     const readCard=document.createElement('div');
-    //     readCard.innerHTML=`<div class="bg-white rounded-2xl flex justify-between p-5 my-3 gap-5">
-
-    //     <div>10 Kids Unaware of Their <br> Halloween Costume</div>
-    //     <div class="flex justify-center items-center"><svg xmlns="http://www.w3.org/2000/svg"
-    //             width="28" height="28" viewBox="0 0 28 28" fill="none">
-    //             <path
-    //                 d="M11.6667 14C11.6667 14.6188 11.9125 15.2123 12.3501 15.6499C12.7877 16.0875 13.3812 16.3333 14 16.3333C14.6188 16.3333 15.2123 16.0875 15.6499 15.6499C16.0875 15.2123 16.3333 14.6188 16.3333 14C16.3333 13.3812 16.0875 12.7877 15.6499 12.3501C15.2123 11.9125 14.6188 11.6667 14 11.6667C13.3812 11.6667 12.7877 11.9125 12.3501 12.3501C11.9125 12.7877 11.6667 13.3812 11.6667 14Z"
-    //                 stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round"
-    //                 stroke-linejoin="round" />
-    //             <path
-    //                 d="M24.5 14C21.7 18.6667 18.2 21 14 21C9.8 21 6.3 18.6667 3.5 14C6.3 9.33333 9.8 7 14 7C18.2 7 21.7 9.33333 24.5 14Z"
-    //                 stroke="#12132D" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round"
-    //                 stroke-linejoin="round" />
-    //         </svg>1,568</div>
-    // </div>`;
-    //   readCountDiv.appendChild(readCard)
-       
-//     });
-// });
 const markAsRead=(title,view)=>{
   console.log(title);
   console.log(view);
@@ -255,3 +232,13 @@ const markAsRead=(title,view)=>{
     </div>`;
       readCountDiv.appendChild(readCard)
 }
+const toggleLoadingSpinner=(isLoading)=>{
+    const loadingSpinner=document.getElementById('loading-spinnner');
+    loadingSpinner.classList.remove('hidden');
+    if (isLoading) {
+        loadingSpinner.classList.remove('hidden');
+    }else{
+        loadingSpinner.classList.add('hidden');
+    }
+}
+
