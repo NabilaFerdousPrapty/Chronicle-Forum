@@ -2,17 +2,15 @@ let isActive=false;
 let readPosts=0;
 let isLoading=false;
 const loadAllPosts=async ()=>{
-    isLoading=true;
+    
     
     const url="https://openapi.programming-hero.com/api/retro-forum/posts";
     const response=await fetch(url);
     const data=await response.json();
-    
     const allPosts=data.posts;
-    toggleLoadingSpinner(isLoading);
     // console.log(allPosts);
     displayAllPosts(allPosts);
-    toggleLoadingSpinner(false);
+    
     
 
 }
@@ -232,13 +230,15 @@ const markAsRead=(title,view)=>{
     </div>`;
       readCountDiv.appendChild(readCard)
 }
-const toggleLoadingSpinner=(isLoading)=>{
-    const loadingSpinner=document.getElementById('loading-spinnner');
-    loadingSpinner.classList.remove('hidden');
+const toggleLoadingSpinner = (isLoading) => {
+    const loadingSpinner = document.getElementById('loading-spinnner');
     if (isLoading) {
         loadingSpinner.classList.remove('hidden');
-    }else{
-        loadingSpinner.classList.add('hidden');
+    } else {
+        setTimeout(() => {
+            loadingSpinner.classList.add('hidden');
+            // Display the content after hiding the spinner
+            displayContent();
+        }, 2000); 
     }
 }
-
