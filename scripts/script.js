@@ -154,7 +154,7 @@ const displayLatestPosts=(data)=>{
     data.forEach(post=>{
         // console.log(post);
         const postCard=document.createElement('div');
-        postCard.innerHTML=` <div class="card w-auto bg-base-100 shadow-xl lg:h-96">
+        postCard.innerHTML=` <div class="card w-auto bg-base-100 shadow-xl ">
         <figure class="px-8 xl:pt-10">
             <img src="${post.cover_image}" alt="Posts"
                 class="rounded-xl" />
