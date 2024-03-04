@@ -149,12 +149,18 @@ const loadLatestPosts=async ()=>{
     displayLatestPosts(data)
 
 }
+const maxDescriptionLength = 100;
+
+
 const displayLatestPosts=(data)=>{
     // console.log(data);
     data.forEach(post=>{
         // console.log(post);
         const postCard=document.createElement('div');
-        postCard.innerHTML=` <div class="card w-auto bg-base-100 shadow-xl ">
+        const truncatedDescription = post.description.length > maxDescriptionLength ?
+    post.description.slice(0, maxDescriptionLength) + '...' :
+    post.description;
+        postCard.innerHTML=` <div class="card w-auto bg-base-100 shadow-xl">
         <figure class="px-8 xl:pt-10">
             <img src="${post.cover_image}" alt="Posts"
                 class="rounded-xl" />
@@ -185,10 +191,11 @@ const displayLatestPosts=(data)=>{
                     </defs>
                 </svg> <span>${post.author.posted_date?post.author.posted_date:"No published Date"}</span></p>
             <h2 class="card-title">${post.title}</h2>
-            <p>${post.description}</p>
-            <div class="card-actions flex">
+            <p class='description '>${truncatedDescription}</p>
+                    ${post.description.length > maxDescriptionLength ? `<button onclick="toggleDescription(event)" data-full-description="${post.description}" class="text-blue-500 absolute top-[75%] left-[75%]">See more</button>` : ''}
+            <div class="card-actions flex items-center">
                 <img src="${post.profile_image}" alt="" class="rounded-full w-24 h-24">
-                <div>
+                <div class=" ">
                     <p>${post.author.name}</p>
                     <p>${post.author.designation ? post.author.designation : "Unknown"}</p>
 
@@ -196,11 +203,21 @@ const displayLatestPosts=(data)=>{
             </div>
         </div>
     </div>`
+    
     const latestPost=document.getElementById('latestPost');
     latestPost.appendChild(postCard);
         
     })
     
+}
+function toggleDescription(event) {
+    const button = event.target;
+    const cardBody = button.closest('.card-body');
+    const descriptionParagraph = cardBody.querySelector('.description');
+    const fullDescription = button.dataset.fullDescription;
+    const currentDescription = descriptionParagraph.textContent;
+    descriptionParagraph.textContent = currentDescription === fullDescription ? truncatedDescription : fullDescription;
+    button.textContent = currentDescription === fullDescription ? 'See more' : '';
 }
 loadLatestPosts();
    
