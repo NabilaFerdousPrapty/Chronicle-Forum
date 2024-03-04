@@ -32,7 +32,7 @@ const displayAllPosts=(allPosts)=>{
         const postCard=document.createElement('div');
         postCard.className="";
         console.log(post.id);
-        postCard.innerHTML=`<div class="bg-[#F3F3F5] rounded-2xl p-5 py-10 my-4">
+        postCard.innerHTML=`<div class="bg-[#F3F3F5] rounded-2xl p-5 py-10 my-4"> 
         <div class="md:flex  items-center lg:gap-28 md:gap-14 gap-6">
             <div class="indicator mx-5">
                ${activeStatus}
@@ -154,8 +154,8 @@ const displayLatestPosts=(data)=>{
     data.forEach(post=>{
         // console.log(post);
         const postCard=document.createElement('div');
-        postCard.innerHTML=` <div class="card w-auto bg-base-100 shadow-xl ">
-        <figure class="px-10 pt-10">
+        postCard.innerHTML=` <div class="card w-auto bg-base-100 shadow-xl lg:h-96">
+        <figure class="px-8 xl:pt-10">
             <img src="${post.cover_image}" alt="Posts"
                 class="rounded-xl" />
         </figure>
